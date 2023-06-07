@@ -19,3 +19,7 @@ _ReSharper.*
 *.swp
 *.userprefs
 *.vs/
+
+#Ignore upgrade log .htm files and backup folders
+*.htm
+Backup*/
