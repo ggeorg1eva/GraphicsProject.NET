@@ -1,6 +1,8 @@
 ﻿using Draw.src.Model;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Draw
 {
@@ -13,25 +15,25 @@ namespace Draw
 		
 		public DialogProcessor()
 		{
-		}
-		
-		#endregion
-		
-		#region Properties
-		
-		/// <summary>
-		/// Избран елемент.
-		/// </summary>
-		private Shape selection;
-		public Shape Selection {
-			get { return selection; }
-			set { selection = value; }
-		}
-		
-		/// <summary>
-		/// Дали в момента диалога е в състояние на "влачене" на избрания елемент.
-		/// </summary>
-		private bool isDragging;
+            Selection = new List<Shape>();
+        }
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Избран елемент.
+        /// </summary>
+        private List<Shape> selection;
+        public List<Shape> Selection { get { return selection; } set { selection = value; } 
+
+    }
+
+    /// <summary>
+    /// Дали в момента диалога е в състояние на "влачене" на избрания елемент.
+    /// </summary>
+    private bool isDragging;
 		public bool IsDragging {
 			get { return isDragging; }
 			set { isDragging = value; }
@@ -46,13 +48,14 @@ namespace Draw
 			get { return lastLocation; }
 			set { lastLocation = value; }
 		}
-		
-		#endregion
-		
-		/// <summary>
-		/// Добавя примитив - правоъгълник на произволно място върху клиентската област.
-		/// </summary>
-		public void AddRandomRectangle()
+
+        #endregion
+
+        #region AddFigures
+        /// <summary>
+        /// Добавя примитив - правоъгълник на произволно място върху клиентската област.
+        /// </summary>
+        public void AddRandomRectangle()
 		{
 			Random rnd = new Random();
 			int x = rnd.Next(100,1000);
@@ -134,8 +137,7 @@ namespace Draw
             ShapeList.Add(dot);
         }
 
-        //to add Shapes:
-        /*public void AddRandomPentagon()
+        public void AddRandomPentagon()
         {
             Random rnd = new Random();
             int x = rnd.Next(100, 1000);
@@ -185,7 +187,9 @@ namespace Draw
             stringShape.Transparency = 255;
 
             ShapeList.Add(stringShape);
-        } */
+        }
+
+        #endregion
 
         /// <summary>
         /// Проверява дали дадена точка е в елемента.
@@ -211,10 +215,81 @@ namespace Draw
 		/// <param name="p">Вектор на транслация.</param>
 		public void TranslateTo(PointF p)
 		{
-			if (selection != null) {
-				selection.Location = new PointF(selection.Location.X + p.X - lastLocation.X, selection.Location.Y + p.Y - lastLocation.Y);
-				lastLocation = p;
-			}
-		}
-	}
+            if (Selection != null)
+            {
+                float diffX = p.X - lastLocation.X;
+                float diffY = p.Y - lastLocation.Y;
+
+                foreach (Shape item in Selection)
+                {
+                    item.Location = new PointF(item.Location.X + diffX, item.Location.Y + diffY);
+                }
+
+                lastLocation = p;
+            }
+        }
+
+        // <summary>
+        // променя цвета на очертанията на избрания примтив
+        // </summary>
+        public void setBorderColor(Color color)
+        {
+            foreach (Shape item in Selection)
+            {
+                item.BorderColor = color;
+            }
+        }
+
+        // <summary>
+        // променя цвета заплъващ избрания примтив
+        // </summary>
+        public void setFillColor(Color color)
+        {
+            foreach (Shape item in Selection)
+            {
+                item.FillColor = color;
+            }
+        }
+
+        // <summary>
+        // променя прозрачността на избрания примтив
+        // </summary>
+        public void setTransparencyLevel(int transparency)
+        {
+            foreach (Shape item in Selection)
+            {
+                if (item.GetType() == typeof(ImageShape))
+                {
+                    MessageBox.Show("Image's transparency cannot be changed", "Image info",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    item.GroupTransparency(transparency);
+                    item.Transparency = transparency;
+                }
+            }
+        }
+
+
+        //<summary>
+        //променя дебелината на очертанието на избрания примитив
+        //</summary>
+        public void setBorderSizeLevel(int borderSize)
+        {
+            foreach (Shape item in Selection)
+            {
+                if (item.GetType() == typeof(ImageShape))
+                {
+                    MessageBox.Show("Image's border cannot be changed", "Image info",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    item.GroupBorderSize(borderSize);
+                    item.BorderSize = borderSize;
+                }
+            }
+        }
+    }
 }

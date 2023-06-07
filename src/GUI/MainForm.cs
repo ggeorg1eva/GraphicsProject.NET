@@ -53,9 +53,33 @@ namespace Draw
 		/// </summary>
 		void ViewPortMouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
-			if (selectButton.Checked) {
-				dialogProcessor.Selection = dialogProcessor.ContainsPoint(e.Location);
-				if (dialogProcessor.Selection != null) {
+			if (selectButton.Checked)
+			{
+				Shape selectedShape = dialogProcessor.ContainsPoint(e.Location);
+
+				if (selectedShape != null)
+				{
+					if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+					{
+						// Селекткиране
+						if (dialogProcessor.Selection.Contains(selectedShape))
+						{
+							dialogProcessor.Selection.Remove(selectedShape);
+						}
+						else
+						{
+							dialogProcessor.Selection.Add(selectedShape);
+						}
+					
+					}
+					else
+					{
+
+						dialogProcessor.Selection.Clear();
+						dialogProcessor.Selection.Add(selectedShape);
+				
+					}
+
 					statusBar.Items[0].Text = "Последно действие: Селекция на примитив";
 					dialogProcessor.IsDragging = true;
 					dialogProcessor.LastLocation = e.Location;
@@ -70,10 +94,22 @@ namespace Draw
 		/// </summary>
 		void ViewPortMouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
-			if (dialogProcessor.IsDragging) {
-				if (dialogProcessor.Selection != null) statusBar.Items[0].Text = "Последно действие: Влачене";
-				dialogProcessor.TranslateTo(e.Location);
-				viewPort.Invalidate();
+			if (dialogProcessor.IsDragging && dialogProcessor.Selection.Count == 1)
+			{
+				Shape selectedShape = dialogProcessor.Selection[0];
+
+				if (selectedShape != null)
+				{
+					statusBar.Items[0].Text = "Последно действие: Влачене";
+
+					int offsetX = (int)(e.Location.X - dialogProcessor.LastLocation.X);
+					int offsetY = (int)(e.Location.Y - dialogProcessor.LastLocation.Y);
+
+					selectedShape.Move(offsetX, offsetY);
+
+					dialogProcessor.LastLocation = e.Location;
+					viewPort.Invalidate();
+				}
 			}
 		}
 
@@ -99,7 +135,128 @@ namespace Draw
 			viewPort.Invalidate();
 		}
 
-	
-      
+		/// <summary>
+		/// Бутон, който поставя на произволно място точка със зададените размери.
+		/// Променя се лентата със състоянието и се инвалидира контрола, в който визуализираме.
+		/// </summary>
+		private void DrawDotButton_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.AddRandomDot();
+
+			statusBar.Items[0].Text = "Последно действие: Рисуване на точка";
+
+			viewPort.Invalidate();
+		}
+		/// <summary>
+		/// Бутон, който поставя на произволно място отсечка със зададените размери.
+		/// Променя се лентата със състоянието и се инвалидира контрола, в който визуализираме.
+		/// </summary>
+		private void DrawLineButton_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.AddRandomLine();
+
+			statusBar.Items[0].Text = "Последно действие: Рисуване на отсечка";
+
+			viewPort.Invalidate();
+		}
+		/// <summary>
+		/// Бутон, който поставя на произволно място квадрат със зададените размери.
+		/// Променя се лентата със състоянието и се инвалидира контрола, в който визуализираме.
+		/// </summary>
+		private void DrawSquareButton_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.AddRandomSquare();
+
+			statusBar.Items[0].Text = "Последно действие: Рисуване на квадрат";
+
+			viewPort.Invalidate();
+		}
+		/// <summary>
+		/// Бутон, който поставя на произволно място триъгълник със зададените размери.
+		/// Променя се лентата със състоянието и се инвалидира контрола, в който визуализираме.
+		/// </summary>
+		private void DrawTriangleButton_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.AddRandomTriangle();
+
+			statusBar.Items[0].Text = "Последно действие: Рисуване на триъгълник";
+
+			viewPort.Invalidate();
+		}
+		/// <summary>
+		/// Бутон, който поставя на произволно място кръг със зададените размери.
+		/// Променя се лентата със състоянието и се инвалидира контрола, в който визуализираме.
+		/// </summary>
+		private void DrawCircleButton_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.AddRandomCircle();
+
+			statusBar.Items[0].Text = "Последно действие: Рисуване на кръг";
+
+			viewPort.Invalidate();
+		}
+		/// <summary>
+		/// Бутон, който поставя на произволно място елипса със зададените размери.
+		/// Променя се лентата със състоянието и се инвалидира контрола, в който визуализираме.
+		/// </summary>
+		private void DrawEllipseButton_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.AddRandomEllipse();
+
+			statusBar.Items[0].Text = "Последно действие: Рисуване на елипса";
+
+			viewPort.Invalidate();
+		}
+		/// <summary>
+		/// Бутон, който поставя на произволно място петоъгълник със зададените размери.
+		/// Променя се лентата със състоянието и се инвалидира контрола, в който визуализираме.
+		/// </summary>
+		private void DrawPentagonButton_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.AddRandomPentagon();
+
+			statusBar.Items[0].Text = "Последно действие: Рисуване на петоъгълник";
+
+			viewPort.Invalidate();
+		}
+		/// <summary>
+		/// Бутон, който поставя на произволно място шестоъгълник със зададените размери.
+		/// Променя се лентата със състоянието и се инвалидира контрола, в който визуализираме.
+		/// </summary>
+		private void DrawHexagonButton_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.AddRandomHexagon();
+
+			statusBar.Items[0].Text = "Последно действие: Рисуване на шестоъгълник";
+
+			viewPort.Invalidate();
+		}
+		/// <summary>
+		/// Бутон, който поставя на произволно място звезда със зададените размери.
+		/// Променя се лентата със състоянието и се инвалидира контрола, в който визуализираме.
+		/// </summary>
+		private void DrawStarButton_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.AddRandomStar();
+
+			statusBar.Items[0].Text = "Последно действие: Рисуване на звезда";
+
+			viewPort.Invalidate();
+		}
+				
+		/// <summary>
+		/// Бутон, който поставя на произволно място ТЕКСТ .
+		/// Променя се лентата със състоянието и се инвалидира контрола, в който визуализираме.
+		/// </summary>
+		private void addStringShapeButton_Click(object sender, EventArgs e)
+        {
+			if (!string.IsNullOrEmpty(addStringTextBox.Text))
+			{
+				dialogProcessor.AddRandomString(addStringTextBox.Text);
+				statusBar.Items[0].Text = "Последно действие: Рисуване на тектс";
+				viewPort.Invalidate();
+			}
+		}
+
     }
 }

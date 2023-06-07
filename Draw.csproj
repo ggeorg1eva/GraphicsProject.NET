@@ -74,6 +74,11 @@
     </Compile>
     <Compile Include="src\GUI\Program.cs" />
     <Compile Include="src\Model\CircleShape.cs" />
+    <Compile Include="src\Model\ImageShape.cs" />
+    <Compile Include="src\Model\StringShape.cs" />
+    <Compile Include="src\Model\StarShape.cs" />
+    <Compile Include="src\Model\HexagonShape.cs" />
+    <Compile Include="src\Model\PentagonShape.cs" />
     <Compile Include="src\Model\TriangleShape.cs" />
     <Compile Include="src\Model\LineShape.cs" />
     <Compile Include="src\Model\DotShape.cs" />
