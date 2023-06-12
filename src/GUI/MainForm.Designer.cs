@@ -53,6 +53,8 @@
             this.addStringTextBox = new System.Windows.Forms.TextBox();
             this.addStringShapeButton = new System.Windows.Forms.Button();
             this.viewPort = new Draw.DoubleBufferedPanel();
+            this.changeBackgroundColor = new System.Windows.Forms.Button();
+            this.changeBorderColorButton = new System.Windows.Forms.Button();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenu.SuspendLayout();
@@ -68,7 +70,7 @@
             this.helpToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(739, 28);
+            this.mainMenu.Size = new System.Drawing.Size(901, 28);
             this.mainMenu.TabIndex = 1;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -121,7 +123,7 @@
             this.statusBar.Location = new System.Drawing.Point(0, 394);
             this.statusBar.Name = "statusBar";
             this.statusBar.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusBar.Size = new System.Drawing.Size(739, 22);
+            this.statusBar.Size = new System.Drawing.Size(901, 22);
             this.statusBar.TabIndex = 2;
             this.statusBar.Text = "statusStrip1";
             // 
@@ -147,7 +149,7 @@
             this.drawStarButton});
             this.speedMenu.Location = new System.Drawing.Point(0, 28);
             this.speedMenu.Name = "speedMenu";
-            this.speedMenu.Size = new System.Drawing.Size(739, 27);
+            this.speedMenu.Size = new System.Drawing.Size(901, 27);
             this.speedMenu.TabIndex = 3;
             this.speedMenu.Text = "toolStrip1";
             // 
@@ -266,14 +268,14 @@
             // 
             // addStringTextBox
             // 
-            this.addStringTextBox.Location = new System.Drawing.Point(395, 33);
+            this.addStringTextBox.Location = new System.Drawing.Point(400, 29);
             this.addStringTextBox.Name = "addStringTextBox";
             this.addStringTextBox.Size = new System.Drawing.Size(90, 22);
             this.addStringTextBox.TabIndex = 5;
             // 
             // addStringShapeButton
             // 
-            this.addStringShapeButton.Location = new System.Drawing.Point(491, 32);
+            this.addStringShapeButton.Location = new System.Drawing.Point(496, 28);
             this.addStringShapeButton.Name = "addStringShapeButton";
             this.addStringShapeButton.Size = new System.Drawing.Size(92, 25);
             this.addStringShapeButton.TabIndex = 6;
@@ -288,18 +290,42 @@
             this.viewPort.Location = new System.Drawing.Point(0, 55);
             this.viewPort.Margin = new System.Windows.Forms.Padding(5);
             this.viewPort.Name = "viewPort";
-            this.viewPort.Size = new System.Drawing.Size(739, 339);
+            this.viewPort.Size = new System.Drawing.Size(901, 339);
             this.viewPort.TabIndex = 4;
             this.viewPort.Paint += new System.Windows.Forms.PaintEventHandler(this.ViewPortPaint);
             this.viewPort.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseDown);
             this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
             this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
             // 
+            // changeBackgroundColor
+            // 
+            this.changeBackgroundColor.Location = new System.Drawing.Point(623, 28);
+            this.changeBackgroundColor.Name = "changeBackgroundColor";
+            this.changeBackgroundColor.Size = new System.Drawing.Size(120, 25);
+            this.changeBackgroundColor.TabIndex = 7;
+            this.changeBackgroundColor.Text = "Set BG Color";
+            this.changeBackgroundColor.UseCompatibleTextRendering = true;
+            this.changeBackgroundColor.UseVisualStyleBackColor = true;
+            this.changeBackgroundColor.Click += new System.EventHandler(this.setBackgroundColorButton_Click);
+            // 
+            // changeBorderColorButton
+            // 
+            this.changeBorderColorButton.Location = new System.Drawing.Point(749, 28);
+            this.changeBorderColorButton.Name = "changeBorderColorButton";
+            this.changeBorderColorButton.Size = new System.Drawing.Size(140, 25);
+            this.changeBorderColorButton.TabIndex = 8;
+            this.changeBorderColorButton.Text = "Set Border Color";
+            this.changeBorderColorButton.UseCompatibleTextRendering = true;
+            this.changeBorderColorButton.UseVisualStyleBackColor = true;
+            this.changeBorderColorButton.Click += new System.EventHandler(this.setBorderColorButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(739, 416);
+            this.ClientSize = new System.Drawing.Size(901, 416);
+            this.Controls.Add(this.changeBorderColorButton);
+            this.Controls.Add(this.changeBackgroundColor);
             this.Controls.Add(this.addStringShapeButton);
             this.Controls.Add(this.addStringTextBox);
             this.Controls.Add(this.viewPort);
@@ -347,5 +373,7 @@
         private System.Windows.Forms.ToolStripButton drawTriangleButton;
         private System.Windows.Forms.TextBox addStringTextBox;
         private System.Windows.Forms.Button addStringShapeButton;
+        private System.Windows.Forms.Button changeBackgroundColor;
+        private System.Windows.Forms.Button changeBorderColorButton;
     }
 }
