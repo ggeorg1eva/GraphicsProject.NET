@@ -258,5 +258,30 @@ namespace Draw
 			}
 		}
 
+        private void setBackgroundColorButton_Click(object sender, EventArgs e)
+        {
+			ColorDialog MyDialog = new ColorDialog();
+			MyDialog.AllowFullOpen = false;
+			MyDialog.ShowHelp = true;
+
+			if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+				dialogProcessor.setFillColor(MyDialog.Color);
+				MyDialog.Dispose();
+            }
+		}
+
+        private void setBorderColorButton_Click(object sender, EventArgs e)
+        {
+			ColorDialog MyDialog = new ColorDialog();
+			MyDialog.AllowFullOpen = false;
+			MyDialog.ShowHelp = true;
+
+			if (MyDialog.ShowDialog() == DialogResult.OK)
+			{
+				dialogProcessor.setBorderColor(MyDialog.Color);
+				MyDialog.Dispose();
+			}
+		}
     }
 }
