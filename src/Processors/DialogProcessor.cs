@@ -232,6 +232,25 @@ namespace Draw
             }
         }
 
+        /// <summary>
+		/// Транслация на избраният елемент на вектор определен от <paramref name="p>p</paramref>
+		/// </summary>
+		/// <param name="p">Вектор на транслация.</param>
+		public void TranslateObjectTo(Shape shape, PointF p)
+        {
+            if (shape != null)
+            {
+                float diffX = p.X - lastLocation.X;
+                float diffY = p.Y - lastLocation.Y;
+
+                
+                shape.Location = new PointF(shape.Location.X + diffX, shape.Location.Y + diffY);
+                
+
+                lastLocation = p;
+            }
+        }
+
         // <summary>
         // променя цвета на очертанията на избрания примтив
         // </summary>
@@ -341,6 +360,39 @@ namespace Draw
             stream.Close();
 
             this.ShapeList = (List<Shape>) shapeList;
+        }
+
+        public void copySelectedObject()
+        {
+            Random rnd = new Random();
+            int x = rnd.Next(100, 1000);
+            int y = rnd.Next(100, 600);
+
+            foreach (Shape item in Selection)
+            {
+                Shape copiedShape = DeepCopy(item);
+                TranslateObjectTo(copiedShape, new PointF(x, y));
+                ShapeList.Add(copiedShape);
+            }
+        }
+
+        public static T DeepCopy<T>(T other)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(ms, other);
+                ms.Position = 0;
+                return (T)formatter.Deserialize(ms);
+            }
+        }
+
+        public void deleteSelectedObject()
+        {
+            foreach (Shape item in Selection)
+            {
+                ShapeList.Remove(item);
+            }
         }
     }
 }
