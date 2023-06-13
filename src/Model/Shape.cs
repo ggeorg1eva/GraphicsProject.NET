@@ -33,6 +33,7 @@ namespace Draw.src.Model
 			this.borderSize = shape.borderSize;
 			this.angle = shape.angle;
 			this.size = shape.size;
+			this.scalingIndex = shape.scalingIndex;
 		}
 		#endregion
 		
@@ -115,6 +116,12 @@ namespace Draw.src.Model
 		{
 			get { return size; }
 			set { size = value; }
+		}
+		private float scalingIndex = 1;
+		public virtual float ScalingIndex
+		{
+			get { return scalingIndex; }
+			set { scalingIndex = value; }
 		}
 		private string name;
 		public virtual string Name

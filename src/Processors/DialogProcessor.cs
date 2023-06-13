@@ -9,15 +9,15 @@ using System.Windows.Forms;
 
 namespace Draw
 {
-	/// <summary>
-	/// Класът, който ще бъде използван при управляване на диалога.
-	/// </summary>
-	public class DialogProcessor : DisplayProcessor
-	{
-		#region Constructor
-		
-		public DialogProcessor()
-		{
+    /// <summary>
+    /// Класът, който ще бъде използван при управляване на диалога.
+    /// </summary>
+    public class DialogProcessor : DisplayProcessor
+    {
+        #region Constructor
+
+        public DialogProcessor()
+        {
             Selection = new List<Shape>();
         }
 
@@ -29,28 +29,33 @@ namespace Draw
         /// Избран елемент.
         /// </summary>
         private List<Shape> selection;
-        public List<Shape> Selection { get { return selection; } set { selection = value; } 
+        public List<Shape> Selection
+        {
+            get { return selection; }
+            set { selection = value; }
 
-    }
+        }
 
-    /// <summary>
-    /// Дали в момента диалога е в състояние на "влачене" на избрания елемент.
-    /// </summary>
-    private bool isDragging;
-		public bool IsDragging {
-			get { return isDragging; }
-			set { isDragging = value; }
-		}
-		
-		/// <summary>
-		/// Последна позиция на мишката при "влачене".
-		/// Използва се за определяне на вектора на транслация.
-		/// </summary>
-		private PointF lastLocation;
-		public PointF LastLocation {
-			get { return lastLocation; }
-			set { lastLocation = value; }
-		}
+        /// <summary>
+        /// Дали в момента диалога е в състояние на "влачене" на избрания елемент.
+        /// </summary>
+        private bool isDragging;
+        public bool IsDragging
+        {
+            get { return isDragging; }
+            set { isDragging = value; }
+        }
+
+        /// <summary>
+        /// Последна позиция на мишката при "влачене".
+        /// Използва се за определяне на вектора на транслация.
+        /// </summary>
+        private PointF lastLocation;
+        public PointF LastLocation
+        {
+            get { return lastLocation; }
+            set { lastLocation = value; }
+        }
 
         #endregion
 
@@ -59,16 +64,16 @@ namespace Draw
         /// Добавя примитив - правоъгълник на произволно място върху клиентската област.
         /// </summary>
         public void AddRandomRectangle()
-		{
-			Random rnd = new Random();
-			int x = rnd.Next(100,1000);
-			int y = rnd.Next(100,600);
-			
-			RectangleShape rect = new RectangleShape(new Rectangle(x,y,100,200));
-			rect.FillColor = Color.White;
+        {
+            Random rnd = new Random();
+            int x = rnd.Next(100, 1000);
+            int y = rnd.Next(100, 600);
 
-			ShapeList.Add(rect);
-		}
+            RectangleShape rect = new RectangleShape(new Rectangle(x, y, 100, 200));
+            rect.FillColor = Color.White;
+
+            ShapeList.Add(rect);
+        }
         public void AddRandomSquare()
         {
             Random rnd = new Random();
@@ -202,22 +207,24 @@ namespace Draw
         /// <param name="point">Указана точка</param>
         /// <returns>Елемента на изображението, на който принадлежи дадената точка.</returns>
         public Shape ContainsPoint(PointF point)
-		{
-			for(int i = ShapeList.Count - 1; i >= 0; i--){
-				if (ShapeList[i].Contains(point)){
-						
-					return ShapeList[i];
-				}	
-			}
-			return null;
-		}
-		
-		/// <summary>
-		/// Транслация на избраният елемент на вектор определен от <paramref name="p>p</paramref>
-		/// </summary>
-		/// <param name="p">Вектор на транслация.</param>
-		public void TranslateTo(PointF p)
-		{
+        {
+            for (int i = ShapeList.Count - 1; i >= 0; i--)
+            {
+                if (ShapeList[i].Contains(point))
+                {
+
+                    return ShapeList[i];
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Транслация на избраният елемент на вектор определен от <paramref name="p>p</paramref>
+        /// </summary>
+        /// <param name="p">Вектор на транслация.</param>
+        public void TranslateTo(PointF p)
+        {
             if (Selection != null)
             {
                 float diffX = p.X - lastLocation.X;
@@ -243,9 +250,9 @@ namespace Draw
                 float diffX = p.X - lastLocation.X;
                 float diffY = p.Y - lastLocation.Y;
 
-                
+
                 shape.Location = new PointF(shape.Location.X + diffX, shape.Location.Y + diffY);
-                
+
 
                 lastLocation = p;
             }
@@ -359,7 +366,7 @@ namespace Draw
 
             stream.Close();
 
-            this.ShapeList = (List<Shape>) shapeList;
+            this.ShapeList = (List<Shape>)shapeList;
         }
 
         public void copySelectedObject()
@@ -411,6 +418,19 @@ namespace Draw
             ImageShape imageShape = new ImageShape(image, new Rectangle(x, y, image.Width / 2, image.Height / 2));
 
             ShapeList.Add(imageShape);
+        }
+
+        public void resizeSelectedShapes(double scalingIndex)
+        {
+            foreach (Shape item in Selection)
+            {
+                if ((item.Height > 300 || item.Width > 300) && scalingIndex > 1 || (item.Height < 10 || item.Width < 10) && scalingIndex < 1) {
+                    continue;
+                }
+                item.Height *= (float) (scalingIndex / item.ScalingIndex);
+                item.Width *= (float) (scalingIndex / item.ScalingIndex);
+                item.ScalingIndex = (float) scalingIndex;
+            }
         }
     }
 }
