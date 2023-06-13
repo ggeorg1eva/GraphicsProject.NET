@@ -64,11 +64,14 @@
             this.copyButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
             this.viewPort = new Draw.DoubleBufferedPanel();
+            this.resizeLabel = new System.Windows.Forms.Label();
+            this.resizeShapeTrackbar = new System.Windows.Forms.TrackBar();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenuChangeBorderSize.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.transparencyTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rotateTrackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.resizeShapeTrackbar)).BeginInit();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -81,7 +84,7 @@
             this.helpToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(1447, 30);
+            this.mainMenu.Size = new System.Drawing.Size(1447, 28);
             this.mainMenu.TabIndex = 1;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -92,7 +95,7 @@
             this.saveToolStripMenuItem,
             this.openToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // exitToolStripMenuItem
@@ -119,13 +122,13 @@
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 26);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // imageToolStripMenuItem
             // 
             this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
-            this.imageToolStripMenuItem.Size = new System.Drawing.Size(65, 26);
+            this.imageToolStripMenuItem.Size = new System.Drawing.Size(65, 24);
             this.imageToolStripMenuItem.Text = "Image";
             this.imageToolStripMenuItem.Click += new System.EventHandler(this.addImageButton_Click);
             // 
@@ -134,7 +137,7 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
@@ -177,7 +180,7 @@
             this.drawHexagonButton,
             this.drawStarButton,
             this.changeBorderSizeComboBox});
-            this.speedMenuChangeBorderSize.Location = new System.Drawing.Point(0, 30);
+            this.speedMenuChangeBorderSize.Location = new System.Drawing.Point(0, 28);
             this.speedMenuChangeBorderSize.Name = "speedMenuChangeBorderSize";
             this.speedMenuChangeBorderSize.Size = new System.Drawing.Size(1447, 62);
             this.speedMenuChangeBorderSize.TabIndex = 3;
@@ -299,6 +302,7 @@
             // changeBorderSizeComboBox
             // 
             this.changeBorderSizeComboBox.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.changeBorderSizeComboBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.changeBorderSizeComboBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.changeBorderSizeComboBox.Items.AddRange(new object[] {
             "Thin",
@@ -312,14 +316,14 @@
             // 
             // addStringTextBox
             // 
-            this.addStringTextBox.Location = new System.Drawing.Point(959, 32);
+            this.addStringTextBox.Location = new System.Drawing.Point(1113, 32);
             this.addStringTextBox.Name = "addStringTextBox";
             this.addStringTextBox.Size = new System.Drawing.Size(92, 22);
             this.addStringTextBox.TabIndex = 5;
             // 
             // addStringShapeButton
             // 
-            this.addStringShapeButton.Location = new System.Drawing.Point(959, 62);
+            this.addStringShapeButton.Location = new System.Drawing.Point(1113, 62);
             this.addStringShapeButton.Name = "addStringShapeButton";
             this.addStringShapeButton.Size = new System.Drawing.Size(92, 25);
             this.addStringShapeButton.TabIndex = 6;
@@ -329,7 +333,7 @@
             // 
             // changeBackgroundColor
             // 
-            this.changeBackgroundColor.Location = new System.Drawing.Point(1057, 33);
+            this.changeBackgroundColor.Location = new System.Drawing.Point(1211, 32);
             this.changeBackgroundColor.Name = "changeBackgroundColor";
             this.changeBackgroundColor.Size = new System.Drawing.Size(140, 25);
             this.changeBackgroundColor.TabIndex = 7;
@@ -340,7 +344,7 @@
             // 
             // changeBorderColorButton
             // 
-            this.changeBorderColorButton.Location = new System.Drawing.Point(1057, 61);
+            this.changeBorderColorButton.Location = new System.Drawing.Point(1211, 62);
             this.changeBorderColorButton.Name = "changeBorderColorButton";
             this.changeBorderColorButton.Size = new System.Drawing.Size(140, 25);
             this.changeBorderColorButton.TabIndex = 8;
@@ -352,7 +356,7 @@
             // transparencyTrackBar
             // 
             this.transparencyTrackBar.AutoSize = false;
-            this.transparencyTrackBar.Location = new System.Drawing.Point(786, 31);
+            this.transparencyTrackBar.Location = new System.Drawing.Point(940, 32);
             this.transparencyTrackBar.Margin = new System.Windows.Forms.Padding(4);
             this.transparencyTrackBar.Name = "transparencyTrackBar";
             this.transparencyTrackBar.Size = new System.Drawing.Size(166, 25);
@@ -363,7 +367,7 @@
             // transparencyLabel
             // 
             this.transparencyLabel.AutoSize = true;
-            this.transparencyLabel.Location = new System.Drawing.Point(682, 35);
+            this.transparencyLabel.Location = new System.Drawing.Point(836, 35);
             this.transparencyLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.transparencyLabel.Name = "transparencyLabel";
             this.transparencyLabel.Size = new System.Drawing.Size(96, 17);
@@ -374,7 +378,7 @@
             // 
             this.rotateTrackBar.AccessibleName = "";
             this.rotateTrackBar.AutoSize = false;
-            this.rotateTrackBar.Location = new System.Drawing.Point(786, 65);
+            this.rotateTrackBar.Location = new System.Drawing.Point(940, 65);
             this.rotateTrackBar.Margin = new System.Windows.Forms.Padding(4);
             this.rotateTrackBar.Name = "rotateTrackBar";
             this.rotateTrackBar.Size = new System.Drawing.Size(166, 25);
@@ -384,7 +388,7 @@
             // rotateShapeLabel
             // 
             this.rotateShapeLabel.AutoSize = true;
-            this.rotateShapeLabel.Location = new System.Drawing.Point(682, 62);
+            this.rotateShapeLabel.Location = new System.Drawing.Point(837, 65);
             this.rotateShapeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.rotateShapeLabel.Name = "rotateShapeLabel";
             this.rotateShapeLabel.Size = new System.Drawing.Size(95, 17);
@@ -393,7 +397,7 @@
             // 
             // copyButton
             // 
-            this.copyButton.Location = new System.Drawing.Point(1203, 31);
+            this.copyButton.Location = new System.Drawing.Point(1357, 33);
             this.copyButton.Name = "copyButton";
             this.copyButton.Size = new System.Drawing.Size(63, 25);
             this.copyButton.TabIndex = 17;
@@ -404,7 +408,7 @@
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(1203, 58);
+            this.deleteButton.Location = new System.Drawing.Point(1357, 58);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(63, 25);
             this.deleteButton.TabIndex = 18;
@@ -417,21 +421,46 @@
             // 
             this.viewPort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.viewPort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viewPort.Location = new System.Drawing.Point(0, 92);
+            this.viewPort.Location = new System.Drawing.Point(0, 90);
             this.viewPort.Margin = new System.Windows.Forms.Padding(5);
             this.viewPort.Name = "viewPort";
-            this.viewPort.Size = new System.Drawing.Size(1447, 383);
+            this.viewPort.Size = new System.Drawing.Size(1447, 385);
             this.viewPort.TabIndex = 4;
+            this.viewPort.Scroll += new System.Windows.Forms.ScrollEventHandler(this.re);
             this.viewPort.Paint += new System.Windows.Forms.PaintEventHandler(this.ViewPortPaint);
             this.viewPort.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseDown);
             this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
             this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
+            // 
+            // resizeLabel
+            // 
+            this.resizeLabel.AutoSize = true;
+            this.resizeLabel.Location = new System.Drawing.Point(699, 65);
+            this.resizeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.resizeLabel.Name = "resizeLabel";
+            this.resizeLabel.Size = new System.Drawing.Size(96, 17);
+            this.resizeLabel.TabIndex = 20;
+            this.resizeLabel.Text = "Resize Shape";
+            // 
+            // resizeShapeTrackbar
+            // 
+            this.resizeShapeTrackbar.AutoSize = false;
+            this.resizeShapeTrackbar.Location = new System.Drawing.Point(662, 32);
+            this.resizeShapeTrackbar.Margin = new System.Windows.Forms.Padding(4);
+            this.resizeShapeTrackbar.Minimum = -10;
+            this.resizeShapeTrackbar.Name = "resizeShapeTrackbar";
+            this.resizeShapeTrackbar.Size = new System.Drawing.Size(166, 25);
+            this.resizeShapeTrackbar.TabIndex = 21;
+            this.resizeShapeTrackbar.Tag = "";
+            this.resizeShapeTrackbar.Scroll += new System.EventHandler(this.resizeShapeTrackBar_Scroll);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1447, 497);
+            this.Controls.Add(this.resizeShapeTrackbar);
+            this.Controls.Add(this.resizeLabel);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.copyButton);
             this.Controls.Add(this.rotateShapeLabel);
@@ -460,6 +489,7 @@
             this.speedMenuChangeBorderSize.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.transparencyTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rotateTrackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.resizeShapeTrackbar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -500,5 +530,7 @@
         private System.Windows.Forms.Button copyButton;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.ToolStripComboBox changeBorderSizeComboBox;
+        private System.Windows.Forms.Label resizeLabel;
+        private System.Windows.Forms.TrackBar resizeShapeTrackbar;
     }
 }

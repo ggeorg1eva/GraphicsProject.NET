@@ -1,7 +1,5 @@
 ﻿using Draw.src.Model;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace Draw
@@ -16,7 +14,7 @@ namespace Draw
 		/// Агрегирания диалогов процесор във формата улеснява манипулацията на модела.
 		/// </summary>
 		private DialogProcessor dialogProcessor = new DialogProcessor();
-		
+
 		public MainForm()
 		{
 			//
@@ -403,5 +401,32 @@ namespace Draw
 			statusBar.Items[0].Text = "Последно действие: Промяна на дебелината на граница";
 			viewPort.Invalidate();
 		}
+
+        private void resizeShapeTrackBar_Scroll(object sender, EventArgs e)
+        {
+			float selectedValue = resizeShapeTrackbar.Value;
+			double scalingIndex = 1;
+
+			if (selectedValue < 0) {
+				scalingIndex = 1 + selectedValue / 4;
+            } else if (selectedValue > 0) {
+				scalingIndex = 1 + 3 * selectedValue / 40;
+			}
+
+			if (scalingIndex == 0)
+            {
+				return;
+            }
+
+			dialogProcessor.resizeSelectedShapes(scalingIndex);
+
+			statusBar.Items[0].Text = "Последно действие: Промяна на мащаба " + scalingIndex + " пъти";
+			viewPort.Invalidate();
+		}
+
+        private void re(object sender, ScrollEventArgs e)
+        {
+
+        }
     }
 }
