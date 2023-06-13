@@ -376,5 +376,32 @@ namespace Draw
 			statusBar.Items[0].Text = "Последно действие: Отваряне";
 			viewPort.Invalidate();
 		}
-	}
+
+        private void borderSizeCombobox_ItemSelected(object sender, EventArgs e)
+        {
+			object selectedItem = changeBorderSizeComboBox.SelectedItem;
+
+			string selectedValue = selectedItem != null ? selectedItem.ToString() : null;
+
+			Console.WriteLine(selectedValue);
+
+
+			if (selectedValue == "Thin")
+			{
+				dialogProcessor.setBorderSizeLevel(1);
+			} else if (selectedValue == "Medium")
+			{
+				dialogProcessor.setBorderSizeLevel(2);
+			} else if (selectedValue == "Large")
+            {
+				dialogProcessor.setBorderSizeLevel(3);
+			} else if (selectedValue == "Extra Large")
+            {
+				dialogProcessor.setBorderSizeLevel(4);
+			}
+
+			statusBar.Items[0].Text = "Последно действие: Промяна на дебелината на граница";
+			viewPort.Invalidate();
+		}
+    }
 }
