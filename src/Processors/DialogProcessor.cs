@@ -271,6 +271,26 @@ namespace Draw
             }
         }
 
+        // <summary>
+        // ротация на избрания примтив
+        // </summary>
+        public void setRotationAngle(int rotation)
+        {
+            foreach (Shape item in Selection)
+            {
+                if (item.GetType() == typeof(ImageShape))
+                {
+                    MessageBox.Show("Image's transparency cannot be changed", "Image info",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    item.Angle = rotation;
+                    item.GroupRotate(rotation);
+                }
+            }
+        }
+
 
         //<summary>
         //променя дебелината на очертанието на избрания примитив
