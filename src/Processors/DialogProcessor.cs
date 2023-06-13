@@ -394,5 +394,23 @@ namespace Draw
                 ShapeList.Remove(item);
             }
         }
+
+        public void addImage(string filePath)
+        {
+            Bitmap image = new Bitmap(filePath);
+            if (image == null)
+            {
+                MessageBox.Show("There isn't inputted image", "Error :(", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Random rnd = new Random();
+            int x = rnd.Next(100, 1000);
+            int y = rnd.Next(100, 600);
+
+            ImageShape imageShape = new ImageShape(image, new Rectangle(x, y, image.Width / 2, image.Height / 2));
+
+            ShapeList.Add(imageShape);
+        }
     }
 }
