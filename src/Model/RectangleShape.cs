@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Draw
+namespace Draw.src.Model
 {
+	[Serializable]
 	/// <summary>
 	/// Класът правоъгълник е основен примитив, който е наследник на базовия Shape.
 	/// </summary>

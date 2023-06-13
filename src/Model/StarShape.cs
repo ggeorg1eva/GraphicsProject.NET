@@ -3,6 +3,7 @@ using System.Drawing;
 
 namespace Draw.src.Model
 {
+    [Serializable]
     class StarShape : Shape
     {
         private PointF[] points = new PointF[10];

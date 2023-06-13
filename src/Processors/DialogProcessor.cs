@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 
 namespace Draw
@@ -310,6 +313,34 @@ namespace Draw
                     item.BorderSize = borderSize;
                 }
             }
+        }
+
+        public void saveFile(object obj, string filePath = null)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream;
+            if (filePath != null)
+            {
+                stream = new FileStream(filePath + ".drw", FileMode.Create);
+            }
+            else
+            {
+                stream = new FileStream("MyFile.drw", FileMode.Create, FileAccess.Write, FileShare.None);
+            }
+            formatter.Serialize(stream, obj);
+            stream.Close();
+        }
+
+        public void openFile(string filePath)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.None);
+
+            object shapeList = formatter.Deserialize(stream);
+
+            stream.Close();
+
+            this.ShapeList = (List<Shape>) shapeList;
         }
     }
 }

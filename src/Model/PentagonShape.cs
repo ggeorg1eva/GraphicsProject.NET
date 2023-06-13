@@ -3,6 +3,7 @@ using System.Drawing;
 
 namespace Draw.src.Model
 {
+    [Serializable]
     class PentagonShape : Shape
     {
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Draw.src.Model;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -305,6 +306,42 @@ namespace Draw
 			dialogProcessor.setRotationAngle(rotation);
 
 			statusBar.Items[0].Text = "Последно действие: Ротация";
+			viewPort.Invalidate();
+		}
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+			SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+			if (saveFileDialog.ShowDialog() == DialogResult.OK)
+			{
+				dialogProcessor.saveFile(dialogProcessor.ShapeList, saveFileDialog.FileName);
+			}
+
+			statusBar.Items[0].Text = "Последно действие: Запазване";
+			viewPort.Invalidate();
+		}
+
+        private void openButton_Click(object sender, EventArgs e)
+        {
+			OpenFileDialog openFileDialog = new OpenFileDialog();
+
+			if (openFileDialog.ShowDialog() != DialogResult.OK)
+			{
+				MessageBox.Show("There isn't inputted file", "Error :(", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+
+			if (!openFileDialog.FileName.EndsWith(".drw"))
+            {
+				MessageBox.Show("Invalid file", "Error :(", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			dialogProcessor.openFile(openFileDialog.FileName);
+
+			statusBar.Items[0].Text = "Последно действие: Отваряне";
 			viewPort.Invalidate();
 		}
     }
