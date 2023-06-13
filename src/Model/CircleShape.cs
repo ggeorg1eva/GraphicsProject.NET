@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 
 namespace Draw.src.Model
 {
+    [Serializable]
     class CircleShape : Shape
     {
         #region Constructor

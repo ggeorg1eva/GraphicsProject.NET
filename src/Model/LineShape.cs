@@ -3,6 +3,7 @@ using System.Drawing;
 
 namespace Draw.src.Model
 {
+    [Serializable]
     class LineShape : Shape
     {
         #region Constructor

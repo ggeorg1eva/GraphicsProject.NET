@@ -3,6 +3,7 @@ using System.Drawing;
 
 namespace Draw.src.Model
 {
+    [Serializable]
     class HexagonShape : Shape
     {
         private PointF[] points = new PointF[6];

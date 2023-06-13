@@ -3,7 +3,8 @@ using System.Drawing;
 
 namespace Draw.src.Model
 {
-    class ImageShape : Shape
+	[Serializable]
+	class ImageShape : Shape
     {
 		private Image image;
 

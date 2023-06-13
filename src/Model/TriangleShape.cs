@@ -3,6 +3,8 @@ using System.Drawing;
 
 namespace Draw.src.Model
 {
+    [Serializable]
+
     class TriangleShape : Shape
     {
         #region Constructor

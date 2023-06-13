@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Draw
+namespace Draw.src.Model
 {
+	[Serializable]
 	/// <summary>
 	/// Базовия клас на примитивите, който съдържа общите характеристики на примитивите.
 	/// </summary>
