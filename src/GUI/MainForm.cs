@@ -358,5 +358,23 @@ namespace Draw
 			statusBar.Items[0].Text = "Последно действие: Триене";
 			viewPort.Invalidate();
 		}
-    }
+
+		private void addImageButton_Click(object sender, EventArgs e)
+		{
+			OpenFileDialog openFileDialog = new OpenFileDialog();
+
+			openFileDialog.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp; *.png)|*.jpg; *.jpeg; *.gif; *.bmp; *.png";
+
+			if (openFileDialog.ShowDialog() != DialogResult.OK)
+			{
+				MessageBox.Show("There isn't inputted file", "Error :(", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			dialogProcessor.addImage(openFileDialog.FileName);
+
+			statusBar.Items[0].Text = "Последно действие: Отваряне";
+			viewPort.Invalidate();
+		}
+	}
 }
