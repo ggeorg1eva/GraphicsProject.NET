@@ -344,5 +344,19 @@ namespace Draw
 			statusBar.Items[0].Text = "Последно действие: Отваряне";
 			viewPort.Invalidate();
 		}
+
+        private void copyButton_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.copySelectedObject();
+			statusBar.Items[0].Text = "Последно действие: Копиране";
+			viewPort.Invalidate();
+		}
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.deleteSelectedObject();
+			statusBar.Items[0].Text = "Последно действие: Триене";
+			viewPort.Invalidate();
+		}
     }
 }

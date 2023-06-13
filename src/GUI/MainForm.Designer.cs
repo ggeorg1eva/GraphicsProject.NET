@@ -61,6 +61,8 @@
             this.viewPort = new Draw.DoubleBufferedPanel();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyButton = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenu.SuspendLayout();
@@ -78,7 +80,7 @@
             this.helpToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(1331, 28);
+            this.mainMenu.Size = new System.Drawing.Size(1447, 28);
             this.mainMenu.TabIndex = 1;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -95,7 +97,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
             // 
@@ -133,7 +135,7 @@
             this.statusBar.Location = new System.Drawing.Point(0, 475);
             this.statusBar.Name = "statusBar";
             this.statusBar.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusBar.Size = new System.Drawing.Size(1331, 22);
+            this.statusBar.Size = new System.Drawing.Size(1447, 22);
             this.statusBar.TabIndex = 2;
             this.statusBar.Text = "statusStrip1";
             // 
@@ -160,7 +162,7 @@
             this.drawStarButton});
             this.speedMenu.Location = new System.Drawing.Point(0, 28);
             this.speedMenu.Name = "speedMenu";
-            this.speedMenu.Size = new System.Drawing.Size(1331, 62);
+            this.speedMenu.Size = new System.Drawing.Size(1447, 62);
             this.speedMenu.TabIndex = 3;
             this.speedMenu.Text = "toolStrip1";
             // 
@@ -365,7 +367,7 @@
             this.viewPort.Location = new System.Drawing.Point(0, 90);
             this.viewPort.Margin = new System.Windows.Forms.Padding(5);
             this.viewPort.Name = "viewPort";
-            this.viewPort.Size = new System.Drawing.Size(1331, 385);
+            this.viewPort.Size = new System.Drawing.Size(1447, 385);
             this.viewPort.TabIndex = 4;
             this.viewPort.Paint += new System.Windows.Forms.PaintEventHandler(this.ViewPortPaint);
             this.viewPort.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseDown);
@@ -386,11 +388,35 @@
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openButton_Click);
             // 
+            // copyButton
+            // 
+            this.copyButton.Location = new System.Drawing.Point(1204, 39);
+            this.copyButton.Name = "copyButton";
+            this.copyButton.Size = new System.Drawing.Size(63, 25);
+            this.copyButton.TabIndex = 17;
+            this.copyButton.Text = "Copy";
+            this.copyButton.UseCompatibleTextRendering = true;
+            this.copyButton.UseVisualStyleBackColor = true;
+            this.copyButton.Click += new System.EventHandler(this.copyButton_Click);
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.Location = new System.Drawing.Point(1273, 39);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(63, 25);
+            this.deleteButton.TabIndex = 18;
+            this.deleteButton.Text = "Delete";
+            this.deleteButton.UseCompatibleTextRendering = true;
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1331, 497);
+            this.ClientSize = new System.Drawing.Size(1447, 497);
+            this.Controls.Add(this.deleteButton);
+            this.Controls.Add(this.copyButton);
             this.Controls.Add(this.rotateShapeLabel);
             this.Controls.Add(this.rotateTrackBar);
             this.Controls.Add(this.transparencyLabel);
@@ -454,5 +480,7 @@
         private System.Windows.Forms.Label rotateShapeLabel;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.Button copyButton;
+        private System.Windows.Forms.Button deleteButton;
     }
 }
