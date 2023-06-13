@@ -48,20 +48,32 @@ namespace Draw.src.Model
             base.DrawSelf(grfx);
             base.RotateShape(grfx);
 
-            points[0] = new PointF(Rectangle.X, Rectangle.Y);
-            points[1] = new PointF(Rectangle.X + Rectangle.Width / 3, Rectangle.Y);
-            points[2] = new PointF(Rectangle.X + Rectangle.Width / 2, Rectangle.Y - (Rectangle.Height / 3) * 2);
-            points[3] = new PointF(Rectangle.X + (Rectangle.Width / 3) * 2, Rectangle.Y);
-            points[4] = new PointF(Rectangle.X + Rectangle.Width, Rectangle.Y);
-            points[5] = new PointF(Rectangle.X + (Rectangle.Width / 4) * 3, Rectangle.Y + (Rectangle.Height / 9) * 4);
-            points[6] = new PointF(Rectangle.X + (Rectangle.Width / 6) * 5, Rectangle.Y + Rectangle.Height);
-            points[7] = new PointF(Rectangle.X + Rectangle.Width / 2, Rectangle.Y + (Rectangle.Height / 3) * 2);
-            points[8] = new PointF(Rectangle.X + Rectangle.Width / 6, Rectangle.Y + Rectangle.Height);
-            points[9] = new PointF(Rectangle.X + Rectangle.Width / 4, Rectangle.Y + (Rectangle.Height / 9) * 4);
+            // {(rcos(2πk/5+π/2),rsin(2πk/5+π/2))∣k=0,...,4} For outter/inner points
+
+            for (int i = 0; i < 5; i++)
+            {
+                this.points[i * 2] = new PointF(this.GetXNthStarPoint(true, i), this.GetYNthStarPoint(true, i));
+                this.points[i * 2 + 1] = new PointF(this.GetXNthStarPoint(false, i), this.GetYNthStarPoint(false, i));
+            }
 
             grfx.FillPolygon(new SolidBrush(Color.FromArgb(Transparency, FillColor)), points);
             grfx.DrawPolygon(new Pen(Color.FromArgb(Transparency, BorderColor), BorderSize), points);
+        }
 
+        private float GetXNthStarPoint(bool isTip, int n)
+        {
+            float radius = isTip ? Rectangle.Height / 2 : Rectangle.Height / 4;
+            double theta = Math.PI - 2 * Math.PI * (n + (isTip ? 0 : 0.5)) / 5 + Math.PI / 10;
+
+            return Rectangle.X + (float)(radius * Math.Cos(theta));
+        }
+
+        private float GetYNthStarPoint(bool isTip, int n)
+        {
+            float radius = isTip ? Rectangle.Height / 2 : Rectangle.Height / 4;
+            double theta = Math.PI - 2 * Math.PI * (n + (isTip ? 0 : 0.5)) / 5 + Math.PI / 10;
+
+            return Rectangle.Y + (float)(radius * Math.Sin(theta));
         }
     }
 }

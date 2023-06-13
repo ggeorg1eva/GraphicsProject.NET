@@ -52,12 +52,18 @@
             this.drawStarButton = new System.Windows.Forms.ToolStripButton();
             this.addStringTextBox = new System.Windows.Forms.TextBox();
             this.addStringShapeButton = new System.Windows.Forms.Button();
-            this.viewPort = new Draw.DoubleBufferedPanel();
             this.changeBackgroundColor = new System.Windows.Forms.Button();
             this.changeBorderColorButton = new System.Windows.Forms.Button();
+            this.transparencyTrackBar = new System.Windows.Forms.TrackBar();
+            this.transparencyLabel = new System.Windows.Forms.Label();
+            this.rotateTrackBar = new System.Windows.Forms.TrackBar();
+            this.rotateShapeLabel = new System.Windows.Forms.Label();
+            this.viewPort = new Draw.DoubleBufferedPanel();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.transparencyTrackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rotateTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -70,7 +76,7 @@
             this.helpToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(901, 28);
+            this.mainMenu.Size = new System.Drawing.Size(1331, 28);
             this.mainMenu.TabIndex = 1;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -120,10 +126,10 @@
             this.statusBar.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.currentStatusLabel});
-            this.statusBar.Location = new System.Drawing.Point(0, 394);
+            this.statusBar.Location = new System.Drawing.Point(0, 475);
             this.statusBar.Name = "statusBar";
             this.statusBar.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusBar.Size = new System.Drawing.Size(901, 22);
+            this.statusBar.Size = new System.Drawing.Size(1331, 22);
             this.statusBar.TabIndex = 2;
             this.statusBar.Text = "statusStrip1";
             // 
@@ -134,6 +140,7 @@
             // 
             // speedMenu
             // 
+            this.speedMenu.AutoSize = false;
             this.speedMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.speedMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.selectButton,
@@ -149,7 +156,7 @@
             this.drawStarButton});
             this.speedMenu.Location = new System.Drawing.Point(0, 28);
             this.speedMenu.Name = "speedMenu";
-            this.speedMenu.Size = new System.Drawing.Size(901, 27);
+            this.speedMenu.Size = new System.Drawing.Size(1331, 62);
             this.speedMenu.TabIndex = 3;
             this.speedMenu.Text = "toolStrip1";
             // 
@@ -160,7 +167,7 @@
             this.selectButton.Image = ((System.Drawing.Image)(resources.GetObject("selectButton.Image")));
             this.selectButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.selectButton.Name = "selectButton";
-            this.selectButton.Size = new System.Drawing.Size(29, 24);
+            this.selectButton.Size = new System.Drawing.Size(29, 59);
             this.selectButton.Text = "selectButton";
             // 
             // drawDotButton
@@ -169,7 +176,7 @@
             this.drawDotButton.Image = ((System.Drawing.Image)(resources.GetObject("drawDotButton.Image")));
             this.drawDotButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.drawDotButton.Name = "drawDotButton";
-            this.drawDotButton.Size = new System.Drawing.Size(29, 24);
+            this.drawDotButton.Size = new System.Drawing.Size(29, 59);
             this.drawDotButton.Text = "drawDot";
             this.drawDotButton.Click += new System.EventHandler(this.DrawDotButton_Click);
             // 
@@ -179,7 +186,7 @@
             this.drawLineButton.Image = ((System.Drawing.Image)(resources.GetObject("drawLineButton.Image")));
             this.drawLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.drawLineButton.Name = "drawLineButton";
-            this.drawLineButton.Size = new System.Drawing.Size(29, 24);
+            this.drawLineButton.Size = new System.Drawing.Size(29, 59);
             this.drawLineButton.Text = "drawLine";
             this.drawLineButton.Click += new System.EventHandler(this.DrawLineButton_Click);
             // 
@@ -189,7 +196,7 @@
             this.drawRectangleSpeedButton.Image = ((System.Drawing.Image)(resources.GetObject("drawRectangleSpeedButton.Image")));
             this.drawRectangleSpeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.drawRectangleSpeedButton.Name = "drawRectangleSpeedButton";
-            this.drawRectangleSpeedButton.Size = new System.Drawing.Size(29, 24);
+            this.drawRectangleSpeedButton.Size = new System.Drawing.Size(29, 59);
             this.drawRectangleSpeedButton.Text = "DrawRectangle";
             this.drawRectangleSpeedButton.Click += new System.EventHandler(this.DrawRectangleSpeedButtonClick);
             // 
@@ -199,7 +206,7 @@
             this.drawSquareButton.Image = ((System.Drawing.Image)(resources.GetObject("drawSquareButton.Image")));
             this.drawSquareButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.drawSquareButton.Name = "drawSquareButton";
-            this.drawSquareButton.Size = new System.Drawing.Size(29, 24);
+            this.drawSquareButton.Size = new System.Drawing.Size(29, 59);
             this.drawSquareButton.Text = "drawSquare";
             this.drawSquareButton.Click += new System.EventHandler(this.DrawSquareButton_Click);
             // 
@@ -209,7 +216,7 @@
             this.drawTriangleButton.Image = ((System.Drawing.Image)(resources.GetObject("drawTriangleButton.Image")));
             this.drawTriangleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.drawTriangleButton.Name = "drawTriangleButton";
-            this.drawTriangleButton.Size = new System.Drawing.Size(29, 24);
+            this.drawTriangleButton.Size = new System.Drawing.Size(29, 59);
             this.drawTriangleButton.Text = "drawTriangle";
             this.drawTriangleButton.Click += new System.EventHandler(this.DrawTriangleButton_Click);
             // 
@@ -219,7 +226,7 @@
             this.drawCircleButton.Image = ((System.Drawing.Image)(resources.GetObject("drawCircleButton.Image")));
             this.drawCircleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.drawCircleButton.Name = "drawCircleButton";
-            this.drawCircleButton.Size = new System.Drawing.Size(29, 24);
+            this.drawCircleButton.Size = new System.Drawing.Size(29, 59);
             this.drawCircleButton.Text = "drawCircle";
             this.drawCircleButton.ToolTipText = "drawCircleButton";
             this.drawCircleButton.Click += new System.EventHandler(this.DrawCircleButton_Click);
@@ -230,7 +237,7 @@
             this.drawEllipseButton.Image = ((System.Drawing.Image)(resources.GetObject("drawEllipseButton.Image")));
             this.drawEllipseButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.drawEllipseButton.Name = "drawEllipseButton";
-            this.drawEllipseButton.Size = new System.Drawing.Size(29, 24);
+            this.drawEllipseButton.Size = new System.Drawing.Size(29, 59);
             this.drawEllipseButton.Text = "drawEllipse";
             this.drawEllipseButton.ToolTipText = "drawEllipse";
             this.drawEllipseButton.Click += new System.EventHandler(this.DrawEllipseButton_Click);
@@ -241,7 +248,7 @@
             this.drawPentagonButton.Image = ((System.Drawing.Image)(resources.GetObject("drawPentagonButton.Image")));
             this.drawPentagonButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.drawPentagonButton.Name = "drawPentagonButton";
-            this.drawPentagonButton.Size = new System.Drawing.Size(29, 24);
+            this.drawPentagonButton.Size = new System.Drawing.Size(29, 59);
             this.drawPentagonButton.Text = "drawPentagon";
             this.drawPentagonButton.ToolTipText = "drawPentagon";
             this.drawPentagonButton.Click += new System.EventHandler(this.DrawPentagonButton_Click);
@@ -252,7 +259,7 @@
             this.drawHexagonButton.Image = ((System.Drawing.Image)(resources.GetObject("drawHexagonButton.Image")));
             this.drawHexagonButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.drawHexagonButton.Name = "drawHexagonButton";
-            this.drawHexagonButton.Size = new System.Drawing.Size(29, 24);
+            this.drawHexagonButton.Size = new System.Drawing.Size(29, 59);
             this.drawHexagonButton.Text = "drawHexagon";
             this.drawHexagonButton.Click += new System.EventHandler(this.DrawHexagonButton_Click);
             // 
@@ -262,20 +269,20 @@
             this.drawStarButton.Image = ((System.Drawing.Image)(resources.GetObject("drawStarButton.Image")));
             this.drawStarButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.drawStarButton.Name = "drawStarButton";
-            this.drawStarButton.Size = new System.Drawing.Size(29, 24);
+            this.drawStarButton.Size = new System.Drawing.Size(29, 59);
             this.drawStarButton.Text = "drawStar";
             this.drawStarButton.Click += new System.EventHandler(this.DrawStarButton_Click);
             // 
             // addStringTextBox
             // 
-            this.addStringTextBox.Location = new System.Drawing.Point(400, 29);
+            this.addStringTextBox.Location = new System.Drawing.Point(377, 48);
             this.addStringTextBox.Name = "addStringTextBox";
             this.addStringTextBox.Size = new System.Drawing.Size(90, 22);
             this.addStringTextBox.TabIndex = 5;
             // 
             // addStringShapeButton
             // 
-            this.addStringShapeButton.Location = new System.Drawing.Point(496, 28);
+            this.addStringShapeButton.Location = new System.Drawing.Point(473, 45);
             this.addStringShapeButton.Name = "addStringShapeButton";
             this.addStringShapeButton.Size = new System.Drawing.Size(92, 25);
             this.addStringShapeButton.TabIndex = 6;
@@ -283,23 +290,9 @@
             this.addStringShapeButton.UseVisualStyleBackColor = true;
             this.addStringShapeButton.Click += new System.EventHandler(this.addStringShapeButton_Click);
             // 
-            // viewPort
-            // 
-            this.viewPort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.viewPort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viewPort.Location = new System.Drawing.Point(0, 55);
-            this.viewPort.Margin = new System.Windows.Forms.Padding(5);
-            this.viewPort.Name = "viewPort";
-            this.viewPort.Size = new System.Drawing.Size(901, 339);
-            this.viewPort.TabIndex = 4;
-            this.viewPort.Paint += new System.Windows.Forms.PaintEventHandler(this.ViewPortPaint);
-            this.viewPort.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseDown);
-            this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
-            this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
-            // 
             // changeBackgroundColor
             // 
-            this.changeBackgroundColor.Location = new System.Drawing.Point(623, 28);
+            this.changeBackgroundColor.Location = new System.Drawing.Point(571, 45);
             this.changeBackgroundColor.Name = "changeBackgroundColor";
             this.changeBackgroundColor.Size = new System.Drawing.Size(120, 25);
             this.changeBackgroundColor.TabIndex = 7;
@@ -310,7 +303,7 @@
             // 
             // changeBorderColorButton
             // 
-            this.changeBorderColorButton.Location = new System.Drawing.Point(749, 28);
+            this.changeBorderColorButton.Location = new System.Drawing.Point(697, 45);
             this.changeBorderColorButton.Name = "changeBorderColorButton";
             this.changeBorderColorButton.Size = new System.Drawing.Size(140, 25);
             this.changeBorderColorButton.TabIndex = 8;
@@ -319,11 +312,71 @@
             this.changeBorderColorButton.UseVisualStyleBackColor = true;
             this.changeBorderColorButton.Click += new System.EventHandler(this.setBorderColorButton_Click);
             // 
+            // transparencyTrackBar
+            // 
+            this.transparencyTrackBar.AutoSize = false;
+            this.transparencyTrackBar.Location = new System.Drawing.Point(857, 39);
+            this.transparencyTrackBar.Margin = new System.Windows.Forms.Padding(4);
+            this.transparencyTrackBar.Name = "transparencyTrackBar";
+            this.transparencyTrackBar.Size = new System.Drawing.Size(166, 25);
+            this.transparencyTrackBar.TabIndex = 12;
+            this.transparencyTrackBar.Tag = "";
+            this.transparencyTrackBar.Scroll += new System.EventHandler(this.transparencyTrackBar_Scroll);
+            // 
+            // transparencyLabel
+            // 
+            this.transparencyLabel.AutoSize = true;
+            this.transparencyLabel.Location = new System.Drawing.Point(891, 68);
+            this.transparencyLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.transparencyLabel.Name = "transparencyLabel";
+            this.transparencyLabel.Size = new System.Drawing.Size(96, 17);
+            this.transparencyLabel.TabIndex = 14;
+            this.transparencyLabel.Text = "Transparency";
+            // 
+            // rotateTrackBar
+            // 
+            this.rotateTrackBar.AccessibleName = "";
+            this.rotateTrackBar.AutoSize = false;
+            this.rotateTrackBar.Location = new System.Drawing.Point(1031, 39);
+            this.rotateTrackBar.Margin = new System.Windows.Forms.Padding(4);
+            this.rotateTrackBar.Name = "rotateTrackBar";
+            this.rotateTrackBar.Size = new System.Drawing.Size(166, 25);
+            this.rotateTrackBar.TabIndex = 15;
+            this.rotateTrackBar.Scroll += new System.EventHandler(this.rotationTrackBar_Scroll);
+            // 
+            // rotateShapeLabel
+            // 
+            this.rotateShapeLabel.AutoSize = true;
+            this.rotateShapeLabel.Location = new System.Drawing.Point(1067, 68);
+            this.rotateShapeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.rotateShapeLabel.Name = "rotateShapeLabel";
+            this.rotateShapeLabel.Size = new System.Drawing.Size(95, 17);
+            this.rotateShapeLabel.TabIndex = 16;
+            this.rotateShapeLabel.Text = "Rotate Shape";
+            // 
+            // viewPort
+            // 
+            this.viewPort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.viewPort.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.viewPort.Location = new System.Drawing.Point(0, 90);
+            this.viewPort.Margin = new System.Windows.Forms.Padding(5);
+            this.viewPort.Name = "viewPort";
+            this.viewPort.Size = new System.Drawing.Size(1331, 385);
+            this.viewPort.TabIndex = 4;
+            this.viewPort.Paint += new System.Windows.Forms.PaintEventHandler(this.ViewPortPaint);
+            this.viewPort.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseDown);
+            this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
+            this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(901, 416);
+            this.ClientSize = new System.Drawing.Size(1331, 497);
+            this.Controls.Add(this.rotateShapeLabel);
+            this.Controls.Add(this.rotateTrackBar);
+            this.Controls.Add(this.transparencyLabel);
+            this.Controls.Add(this.transparencyTrackBar);
             this.Controls.Add(this.changeBorderColorButton);
             this.Controls.Add(this.changeBackgroundColor);
             this.Controls.Add(this.addStringShapeButton);
@@ -344,6 +397,8 @@
             this.statusBar.PerformLayout();
             this.speedMenu.ResumeLayout(false);
             this.speedMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.transparencyTrackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rotateTrackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -375,5 +430,9 @@
         private System.Windows.Forms.Button addStringShapeButton;
         private System.Windows.Forms.Button changeBackgroundColor;
         private System.Windows.Forms.Button changeBorderColorButton;
+        private System.Windows.Forms.TrackBar transparencyTrackBar;
+        private System.Windows.Forms.Label transparencyLabel;
+        private System.Windows.Forms.TrackBar rotateTrackBar;
+        private System.Windows.Forms.Label rotateShapeLabel;
     }
 }

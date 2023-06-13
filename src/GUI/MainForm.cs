@@ -283,5 +283,29 @@ namespace Draw
 				MyDialog.Dispose();
 			}
 		}
+
+        private void transparencyTrackBar_Scroll(object sender, EventArgs e)
+        {
+			int trackBarMax = transparencyTrackBar.Maximum;
+			int transparencyMax = 255;
+
+			int transparency = (int)(((double)transparencyTrackBar.Value / trackBarMax) * transparencyMax);
+			dialogProcessor.setTransparencyLevel(transparency);
+
+			statusBar.Items[0].Text = "Последно действие: Промяна на прозрачност";
+			viewPort.Invalidate();
+		}
+
+        private void rotationTrackBar_Scroll(object sender, EventArgs e)
+        {
+			int trackBarMax = rotateTrackBar.Maximum;
+			int rotationMax = 360;
+
+			int rotation = (int)(((double)rotateTrackBar.Value / trackBarMax) * rotationMax);
+			dialogProcessor.setRotationAngle(rotation);
+
+			statusBar.Items[0].Text = "Последно действие: Ротация";
+			viewPort.Invalidate();
+		}
     }
 }
