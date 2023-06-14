@@ -19,6 +19,9 @@ namespace Draw
         public DialogProcessor()
         {
             Selection = new List<Shape>();
+            Groups = new List<GroupOfShapes>();
+            isGroupingOn = false;
+            isUngroupingOn = false;
         }
 
         #endregion
@@ -34,6 +37,37 @@ namespace Draw
             get { return selection; }
             set { selection = value; }
 
+        }
+
+        /// <summary>
+        /// Списък от групи
+        /// </summary>
+        private List<GroupOfShapes> groups;
+        public List<GroupOfShapes> Groups
+        {
+            get { return groups; }
+            set { groups = value; }
+
+        }
+
+        /// <summary>
+        /// Дали в момента е пуснато групирането.
+        /// </summary>
+        private bool isGroupingOn;
+        public bool IsGroupingOn
+        {
+            get { return isGroupingOn; }
+            set { isGroupingOn = value; }
+        }
+
+        /// <summary>
+        /// Дали в момента е пуснато разгрупирането.
+        /// </summary>
+        private bool isUngroupingOn;
+        public bool IsUngroupingOn
+        {
+            get { return isUngroupingOn; }
+            set { isUngroupingOn = value; }
         }
 
         /// <summary>
@@ -217,6 +251,20 @@ namespace Draw
                 }
             }
             return null;
+        }
+
+        public GroupOfShapes returnGroupOfShape(Shape shape)
+        {
+            GroupOfShapes groupWhereTheShapeExists = null;
+            foreach (GroupOfShapes group in groups)
+            {
+                if (group.checkIfShapeIsInTheGroup(shape))
+                {
+                    groupWhereTheShapeExists = group;
+                    break;
+                }
+            }
+            return groupWhereTheShapeExists;
         }
 
         /// <summary>
