@@ -1,5 +1,6 @@
 ﻿using Draw.src.Model;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Draw
@@ -21,7 +22,7 @@ namespace Draw
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
 			InitializeComponent();
-			
+
 			//
 			// TODO: Add constructor code after the InitializeComponent() call.
 			//
@@ -34,7 +35,7 @@ namespace Draw
 		{
 			Close();
 		}
-		
+
 		/// <summary>
 		/// Събитието, което се прихваща, за да се превизуализира при изменение на модела.
 		/// </summary>
@@ -42,7 +43,7 @@ namespace Draw
 		{
 			dialogProcessor.ReDraw(sender, e);
 		}
-		
+
 
 		/// <summary>
 		/// Прихващане на координатите при натискането на бутон на мишката и проверка (в обратен ред) дали не е
@@ -58,7 +59,7 @@ namespace Draw
 
 				if (selectedShape != null)
 				{
-					if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+					if ((Control.ModifierKeys & Keys.Control) == Keys.Control && !this.dialogProcessor.IsGroupingOn)
 					{
 						// Селекткиране
 						if (dialogProcessor.Selection.Contains(selectedShape))
@@ -69,14 +70,82 @@ namespace Draw
 						{
 							dialogProcessor.Selection.Add(selectedShape);
 						}
-					
+
+					}
+					else if (dialogProcessor.IsGroupingOn)
+					{
+						GroupOfShapes currentGroupOfShapes = null;
+						int lastId = 0;
+						foreach (GroupOfShapes group in this.dialogProcessor.Groups)
+						{
+							lastId = group.Id;
+							if (group.IsSelected)
+							{
+								currentGroupOfShapes = group;
+							}
+						}
+
+						if (currentGroupOfShapes == null)
+						{
+							currentGroupOfShapes = new GroupOfShapes(lastId + 1, true, new List<Shape>());
+							this.dialogProcessor.Groups.Add(currentGroupOfShapes);
+						}
+
+						bool shouldAdd = true;
+						foreach (GroupOfShapes group in dialogProcessor.Groups)
+						{
+							if (group.checkIfShapeIsInTheGroup(selectedShape))
+                            {
+								shouldAdd = false;
+								break;
+                            }
+                        }
+
+						if (shouldAdd)
+                        {
+							currentGroupOfShapes.addShapeToTheGroup(selectedShape);
+						}
+
+						dialogProcessor.Selection.Clear();
+						foreach (Shape shape in currentGroupOfShapes.Shapes)
+						{
+							this.dialogProcessor.Selection.Add(shape);
+						}
+					}
+					else if (dialogProcessor.IsUngroupingOn)
+                    {
+						foreach (GroupOfShapes group in dialogProcessor.Groups)
+						{
+							if (group.checkIfShapeIsInTheGroup(selectedShape))
+							{
+								group.IsSelected = true;
+								group.Shapes.Remove(selectedShape);
+							}
+							else
+							{
+								group.IsSelected = false;
+							}
+						}
+						dialogProcessor.Selection.Clear();
+						this.dialogProcessor.Selection.Add(selectedShape);
 					}
 					else
 					{
-
+						GroupOfShapes group = dialogProcessor.returnGroupOfShape(selectedShape);
 						dialogProcessor.Selection.Clear();
 						dialogProcessor.Selection.Add(selectedShape);
-				
+						if (group != null)
+                        {
+							foreach (Shape shape in group.Shapes)
+                            {
+								if (dialogProcessor.Selection.Contains(shape))
+                                {
+									continue;
+                                }
+								dialogProcessor.Selection.Add(shape);
+
+							}
+						}
 					}
 
 					statusBar.Items[0].Text = "Последно действие: Селекция на примитив";
@@ -93,23 +162,44 @@ namespace Draw
 		/// </summary>
 		void ViewPortMouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
-			if (dialogProcessor.IsDragging && dialogProcessor.Selection.Count == 1)
-			{
-				Shape selectedShape = dialogProcessor.Selection[0];
+			if (!dialogProcessor.IsDragging || dialogProcessor.Selection.Count <= 0)
+            {
+				return;
+            }
 
-				if (selectedShape != null)
-				{
-					statusBar.Items[0].Text = "Последно действие: Влачене";
+			List<Shape> selectedShapes = dialogProcessor.Selection;
 
-					int offsetX = (int)(e.Location.X - dialogProcessor.LastLocation.X);
-					int offsetY = (int)(e.Location.Y - dialogProcessor.LastLocation.Y);
+			List<GroupOfShapes> groupOfShapes = dialogProcessor.Groups;
 
-					selectedShape.Move(offsetX, offsetY);
-
-					dialogProcessor.LastLocation = e.Location;
-					viewPort.Invalidate();
+			
+			foreach (Shape shape in selectedShapes)
+            {
+				GroupOfShapes group = dialogProcessor.returnGroupOfShape(shape);
+				if (group != null)
+                {
+					foreach (GroupOfShapes currentGroups in groupOfShapes)
+                    {
+						currentGroups.IsSelected = false;
+                    }
+					selectedShapes = group.Shapes;
+					group.IsSelected = true;
 				}
+            }
+
+
+			foreach (Shape selectedShape in selectedShapes)
+            {
+				int offsetX = (int)(e.Location.X - dialogProcessor.LastLocation.X);
+				int offsetY = (int)(e.Location.Y - dialogProcessor.LastLocation.Y);
+
+				selectedShape.Move(offsetX, offsetY);
+				
+				viewPort.Invalidate();
 			}
+
+			dialogProcessor.LastLocation = e.Location;
+
+			statusBar.Items[0].Text = "Последно действие: Влачене";
 		}
 
 		/// <summary>
@@ -266,6 +356,7 @@ namespace Draw
 			if (MyDialog.ShowDialog() == DialogResult.OK)
             {
 				dialogProcessor.setFillColor(MyDialog.Color);
+				viewPort.Invalidate();
 				MyDialog.Dispose();
             }
 		}
@@ -279,6 +370,7 @@ namespace Draw
 			if (MyDialog.ShowDialog() == DialogResult.OK)
 			{
 				dialogProcessor.setBorderColor(MyDialog.Color);
+				viewPort.Invalidate();
 				MyDialog.Dispose();
 			}
 		}
@@ -424,9 +516,32 @@ namespace Draw
 			viewPort.Invalidate();
 		}
 
-        private void re(object sender, ScrollEventArgs e)
+        private void groupButton_Click(object sender, EventArgs e)
         {
+			this.stopGroupingButton_Click(sender, e);
+			this.dialogProcessor.IsGroupingOn = true;
+			this.stopGroupingButton.Text = "Stop Grouping";
+			this.groupButton.BackColor = System.Drawing.Color.Silver;
+		}
 
-        }
+        private void stopGroupingButton_Click(object sender, EventArgs e)
+        {
+			this.dialogProcessor.IsGroupingOn = false;
+			this.dialogProcessor.IsUngroupingOn = false;
+			this.groupButton.BackColor = System.Drawing.SystemColors.Control;
+			this.ungroupButton.BackColor = System.Drawing.SystemColors.Control;
+			foreach (GroupOfShapes group in dialogProcessor.Groups)
+			{
+				group.IsSelected = false;
+            }
+		}
+
+        private void ungroupButton_Click(object sender, EventArgs e)
+        {
+			this.stopGroupingButton_Click(sender, e);
+			this.dialogProcessor.IsUngroupingOn = true;
+			this.stopGroupingButton.Text = "Stop Ungrouping";
+			this.ungroupButton.BackColor = System.Drawing.Color.Silver;
+		}
     }
 }

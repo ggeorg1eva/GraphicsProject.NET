@@ -63,9 +63,12 @@
             this.rotateShapeLabel = new System.Windows.Forms.Label();
             this.copyButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
-            this.viewPort = new Draw.DoubleBufferedPanel();
             this.resizeLabel = new System.Windows.Forms.Label();
             this.resizeShapeTrackbar = new System.Windows.Forms.TrackBar();
+            this.groupButton = new System.Windows.Forms.Button();
+            this.stopGroupingButton = new System.Windows.Forms.Button();
+            this.ungroupButton = new System.Windows.Forms.Button();
+            this.viewPort = new Draw.DoubleBufferedPanel();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenuChangeBorderSize.SuspendLayout();
@@ -302,7 +305,6 @@
             // changeBorderSizeComboBox
             // 
             this.changeBorderSizeComboBox.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.changeBorderSizeComboBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.changeBorderSizeComboBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.changeBorderSizeComboBox.Items.AddRange(new object[] {
             "Thin",
@@ -408,7 +410,7 @@
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(1357, 58);
+            this.deleteButton.Location = new System.Drawing.Point(1357, 62);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(63, 25);
             this.deleteButton.TabIndex = 18;
@@ -416,6 +418,64 @@
             this.deleteButton.UseCompatibleTextRendering = true;
             this.deleteButton.UseVisualStyleBackColor = true;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
+            // resizeLabel
+            // 
+            this.resizeLabel.AutoSize = true;
+            this.resizeLabel.Location = new System.Drawing.Point(527, 35);
+            this.resizeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.resizeLabel.Name = "resizeLabel";
+            this.resizeLabel.Size = new System.Drawing.Size(96, 17);
+            this.resizeLabel.TabIndex = 20;
+            this.resizeLabel.Text = "Resize Shape";
+            // 
+            // resizeShapeTrackbar
+            // 
+            this.resizeShapeTrackbar.AutoSize = false;
+            this.resizeShapeTrackbar.Location = new System.Drawing.Point(622, 33);
+            this.resizeShapeTrackbar.Margin = new System.Windows.Forms.Padding(4);
+            this.resizeShapeTrackbar.Minimum = -10;
+            this.resizeShapeTrackbar.Name = "resizeShapeTrackbar";
+            this.resizeShapeTrackbar.Size = new System.Drawing.Size(206, 25);
+            this.resizeShapeTrackbar.TabIndex = 21;
+            this.resizeShapeTrackbar.Tag = "";
+            this.resizeShapeTrackbar.Scroll += new System.EventHandler(this.resizeShapeTrackBar_Scroll);
+            // 
+            // groupButton
+            // 
+            this.groupButton.BackColor = System.Drawing.SystemColors.Control;
+            this.groupButton.Location = new System.Drawing.Point(530, 61);
+            this.groupButton.Name = "groupButton";
+            this.groupButton.Size = new System.Drawing.Size(63, 25);
+            this.groupButton.TabIndex = 22;
+            this.groupButton.Text = "Group";
+            this.groupButton.UseCompatibleTextRendering = true;
+            this.groupButton.UseVisualStyleBackColor = false;
+            this.groupButton.Click += new System.EventHandler(this.groupButton_Click);
+            // 
+            // stopGroupingButton
+            // 
+            this.stopGroupingButton.BackColor = System.Drawing.SystemColors.Control;
+            this.stopGroupingButton.Location = new System.Drawing.Point(599, 61);
+            this.stopGroupingButton.Name = "stopGroupingButton";
+            this.stopGroupingButton.Size = new System.Drawing.Size(138, 25);
+            this.stopGroupingButton.TabIndex = 23;
+            this.stopGroupingButton.Text = "Stop Grouping";
+            this.stopGroupingButton.UseCompatibleTextRendering = true;
+            this.stopGroupingButton.UseVisualStyleBackColor = false;
+            this.stopGroupingButton.Click += new System.EventHandler(this.stopGroupingButton_Click);
+            // 
+            // ungroupButton
+            // 
+            this.ungroupButton.BackColor = System.Drawing.SystemColors.Control;
+            this.ungroupButton.Location = new System.Drawing.Point(743, 61);
+            this.ungroupButton.Name = "ungroupButton";
+            this.ungroupButton.Size = new System.Drawing.Size(85, 25);
+            this.ungroupButton.TabIndex = 24;
+            this.ungroupButton.Text = "Ungroup";
+            this.ungroupButton.UseCompatibleTextRendering = true;
+            this.ungroupButton.UseVisualStyleBackColor = false;
+            this.ungroupButton.Click += new System.EventHandler(this.ungroupButton_Click);
             // 
             // viewPort
             // 
@@ -426,39 +486,19 @@
             this.viewPort.Name = "viewPort";
             this.viewPort.Size = new System.Drawing.Size(1447, 385);
             this.viewPort.TabIndex = 4;
-            this.viewPort.Scroll += new System.Windows.Forms.ScrollEventHandler(this.re);
             this.viewPort.Paint += new System.Windows.Forms.PaintEventHandler(this.ViewPortPaint);
             this.viewPort.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseDown);
             this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
             this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
-            // 
-            // resizeLabel
-            // 
-            this.resizeLabel.AutoSize = true;
-            this.resizeLabel.Location = new System.Drawing.Point(699, 65);
-            this.resizeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.resizeLabel.Name = "resizeLabel";
-            this.resizeLabel.Size = new System.Drawing.Size(96, 17);
-            this.resizeLabel.TabIndex = 20;
-            this.resizeLabel.Text = "Resize Shape";
-            // 
-            // resizeShapeTrackbar
-            // 
-            this.resizeShapeTrackbar.AutoSize = false;
-            this.resizeShapeTrackbar.Location = new System.Drawing.Point(662, 32);
-            this.resizeShapeTrackbar.Margin = new System.Windows.Forms.Padding(4);
-            this.resizeShapeTrackbar.Minimum = -10;
-            this.resizeShapeTrackbar.Name = "resizeShapeTrackbar";
-            this.resizeShapeTrackbar.Size = new System.Drawing.Size(166, 25);
-            this.resizeShapeTrackbar.TabIndex = 21;
-            this.resizeShapeTrackbar.Tag = "";
-            this.resizeShapeTrackbar.Scroll += new System.EventHandler(this.resizeShapeTrackBar_Scroll);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1447, 497);
+            this.Controls.Add(this.ungroupButton);
+            this.Controls.Add(this.stopGroupingButton);
+            this.Controls.Add(this.groupButton);
             this.Controls.Add(this.resizeShapeTrackbar);
             this.Controls.Add(this.resizeLabel);
             this.Controls.Add(this.deleteButton);
@@ -532,5 +572,8 @@
         private System.Windows.Forms.ToolStripComboBox changeBorderSizeComboBox;
         private System.Windows.Forms.Label resizeLabel;
         private System.Windows.Forms.TrackBar resizeShapeTrackbar;
+        private System.Windows.Forms.Button groupButton;
+        private System.Windows.Forms.Button stopGroupingButton;
+        private System.Windows.Forms.Button ungroupButton;
     }
 }
