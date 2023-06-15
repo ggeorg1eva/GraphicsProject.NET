@@ -357,7 +357,7 @@ namespace Draw
             {
                 if (item.GetType() == typeof(ImageShape))
                 {
-                    MessageBox.Show("Image's transparency cannot be changed", "Image info",
+                    MessageBox.Show("Images cannot be rotated", "Image info",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else

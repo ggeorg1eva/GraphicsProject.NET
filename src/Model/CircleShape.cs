@@ -33,10 +33,15 @@ namespace Draw.src.Model
         public override void DrawSelf(Graphics grfx)
         {
             base.DrawSelf(grfx);
+            base.RotateShape(grfx);
 
-            grfx.FillEllipse(new SolidBrush(Color.FromArgb(Transparency, FillColor)),
+            Pen pen = new Pen(Color.FromArgb(Transparency, BorderColor), BorderSize);
+            SolidBrush brush = new SolidBrush(Color.FromArgb(Transparency, FillColor));
+
+
+            grfx.FillEllipse(brush,
                               Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
-            grfx.DrawEllipse(new Pen(Color.FromArgb(Transparency, BorderColor), BorderSize),
+            grfx.DrawEllipse(pen,
                               Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
         }
     }
